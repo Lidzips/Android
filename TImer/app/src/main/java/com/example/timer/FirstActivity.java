@@ -1,66 +1,42 @@
 package com.example.timer;
 
 import android.app.Activity;
-
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
+import java.util.Locale;
+import android.os.Handler;
 import android.widget.TextView;
 
-import java.util.Locale;
-
-public class MainActivity extends Activity {
+public class FirstActivity extends Activity {
+    //Количество секунд на секундомере.
     private int seconds = 0;
+    //Секундомер работает?
     private boolean running;
-    private boolean wasRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState != null) {
-            seconds = savedInstanceState.getInt("seconds");
-            running = savedInstanceState.getBoolean("running");
-            wasRunning = savedInstanceState.getBoolean("wasRunning");
-        }
         runTimer();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putInt("seconds", seconds);
-        savedInstanceState.putBoolean("running", running);
-        savedInstanceState.putBoolean("wasRunning", wasRunning);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (wasRunning) {
-            running = true;
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        wasRunning = running;
-        running = false;
-    }
-
+    //Запустить секундомер при щелчке на кнопке Start.
     public void onClickStart(View view) {
         running = true;
     }
 
+    //Остановить секундомер при щелчке на кнопке Stop.
     public void onClickStop(View view) {
         running = false;
     }
 
+    //Сбросить секундомер при щелчке на кнопке Reset.
     public void onClickReset(View view) {
         running = false;
         seconds = 0;
     }
 
+    //Обновление показаний таймера.
     private void runTimer() {
         final TextView timeView = (TextView)findViewById(R.id.time_view);
         final Handler handler = new Handler();

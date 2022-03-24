@@ -1,15 +1,13 @@
 package com.example.timer;
 
 import android.app.Activity;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
-
 import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class ThirdActivity extends Activity {
     private int seconds = 0;
     private boolean running;
     private boolean wasRunning;
@@ -34,18 +32,17 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStop() {
+        super.onStop();
+        wasRunning = running;
+        running = false;
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (wasRunning) {
             running = true;
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        wasRunning = running;
-        running = false;
     }
 
     public void onClickStart(View view) {
