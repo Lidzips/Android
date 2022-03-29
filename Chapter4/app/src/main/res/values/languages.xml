@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Пример 6 - массивы строк-->
+    <string-array name="languages">
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Dart</item>
+    </string-array>
+</resources>

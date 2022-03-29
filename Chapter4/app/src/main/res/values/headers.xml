@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Пример 3 - добавление нового файла resources-->
+    <string name="welcome">Добро пожаловать</string>
+    <string name="click_button">Нажмите на кнопку</string>
+</resources>
