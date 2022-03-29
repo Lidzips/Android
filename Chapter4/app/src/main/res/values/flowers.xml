@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Пример 5 - различные окончания-->
+    <plurals name="flowers">
+        <item quantity="one">%d цветок</item>
+        <item quantity="few">%d цветка</item>
+        <item quantity="many">%d цветков</item>
+    </plurals>
+</resources>
