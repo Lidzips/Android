@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="products">
+        <item>19.5\" Монитор HP V20 черный</item>
+        <item>23.8\" Монитор Philips 241V8L/01 черный</item>
+        <item>23.8\" Монитор HP 24f черный</item>
+        <item>23.8\" Монитор Acer KA242Ybi черный</item>
+        <item>23.8\" Монитор LG 24MP400-B черный</item>
+        <item>23.6\" Монитор HP X24c черный</item>
+        <item>23.8\" Монитор LG 24MP60G-B черный</item>
+    </string-array>
+</resources>

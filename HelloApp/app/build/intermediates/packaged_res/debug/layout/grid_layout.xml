@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:rowCount="6"
+    android:columnCount="4">
+
+    <Button
+        android:text="div"
+        android:onClick="onClickDiv"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="mod"
+        android:onClick="onClickMod"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="CE"
+        android:onClick="onClickCE"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="C"
+        android:onClick="onClickC"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="onClickModule"
+        android:text="|x|"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="n!"
+        android:onClick="onClickFact"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="1/x"
+        android:onClick="onClickReverse"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="/"
+        android:onClick="onClickDivision"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="7"
+        android:onClick="onClick7"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="8"
+        android:onClick="onClick8"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="9"
+        android:onClick="onClick9"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="*"
+        android:onClick="onClickMultiply"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="4"
+        android:onClick="onClick4"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="5"
+        android:onClick="onClick5"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="6"
+        android:onClick="onClick6"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="-"
+        android:onClick="onClickSubtraction"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="1"
+        android:onClick="onClick1"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="2"
+        android:onClick="onClick2"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="3"
+        android:onClick="onClick3"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="+"
+        android:onClick="onClickAddition"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="+/-"
+        android:onClick="onClickSignChange"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="0"
+        android:onClick="onClick0"
+        android:backgroundTint="#398bb8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text=","
+        android:onClick="onClickComma"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="="
+        android:onClick="onClickEquals"
+        android:backgroundTint="#6ab1ba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</GridLayout>

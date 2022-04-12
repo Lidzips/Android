@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="eateries">
+        <item>Макдональдс</item>
+        <item>Бургер кинг</item>
+        <item>KFC</item>
+        <item>Крошка картошка</item>
+        <item>Теремок</item>
+    </string-array>
+</resources>

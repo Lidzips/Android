@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="prices">
+        <item>11499</item>
+        <item>13999</item>
+        <item>15299</item>
+        <item>15299</item>
+        <item>15999</item>
+        <item>16499</item>
+        <item>16999</item>
+    </integer-array>
+</resources>
