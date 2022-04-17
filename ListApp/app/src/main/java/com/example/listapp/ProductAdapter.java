@@ -49,7 +49,7 @@ class ProductAdapter extends ArrayAdapter<Product> {
     private class ViewHolder {
         final ImageView imageView;
         final TextView nameView, priceView;
-        ViewHolder(View view){
+        ViewHolder(View view) {
             imageView = view.findViewById(R.id.pic);
             nameView = view.findViewById(R.id.name);
             priceView = view.findViewById(R.id.price);

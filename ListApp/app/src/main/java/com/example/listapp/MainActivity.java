@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,18 +74,27 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < products.size(); i++) {
                 if (products.get(i).getName().contains(text)) {
                     checker[i] = true;
+                    System.out.println(i);
                 }
             }
-
-            for (int i = 0; i < products.size(); i++) {
-                if (!checker[i]) {
+            int maxpos = products.size();
+            int j = 0;
+            for (int i = 0; i < maxpos; i++) {
+                if (!checker[j]) {
                     productAdapter.remove(products.get(i));
+                    maxpos--;
+                    i--;
                 }
+                j++;
             }
-
         } else {
             setInitialData();
         }
+        productAdapter.notifyDataSetChanged();
+    }
+
+    public void onSort(View view) {
+        Collections.shuffle(products);
         productAdapter.notifyDataSetChanged();
     }
 }
