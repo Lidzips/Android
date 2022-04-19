@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> products = new ArrayList<Product>();
     ListView productsList;
     ProductAdapter productAdapter;
+    boolean sorted = false;
+    boolean sortDescending = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         products.add(new Product (prodNames[4], prodPrices[4], R.drawable.lg24mp));
         products.add(new Product (prodNames[5], prodPrices[5], R.drawable.lg24mk));
         products.add(new Product (prodNames[6], prodPrices[6], R.drawable.hpx24c));
+        sorted = false;
+        sortDescending = false;
     }
 
     public void onSearch(View view) {
@@ -94,7 +98,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSort(View view) {
-        Collections.shuffle(products);
+
+        if (!sorted || sortDescending) {
+            productAdapter.sort(new Comparator<Product>() {
+                @Override
+                public int compare(Product obj1, Product obj2) {
+                    return obj1.getName().compareToIgnoreCase(obj2.getName());
+                }
+            });
+            sortDescending = false;
+        } else {
+            productAdapter.sort(new Comparator<Product>() {
+                @Override
+                public int compare(Product obj1, Product obj2) {
+                    return obj2.getName().compareToIgnoreCase(obj1.getName());
+                }
+            });
+            sortDescending = true;
+        }
+        sorted = true;
         productAdapter.notifyDataSetChanged();
     }
 }
