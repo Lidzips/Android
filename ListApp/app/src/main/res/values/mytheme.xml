@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">#F68F36</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">#DA8912</item>
+        <item name="colorSecondaryVariant">#FF9800</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:colorButtonNormal">#F4B14D</item>
+    </style>
+</resources>
