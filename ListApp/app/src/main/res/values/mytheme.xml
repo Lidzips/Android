@@ -8,6 +8,6 @@
         <item name="colorSecondaryVariant">#FF9800</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:colorButtonNormal">#F4B14D</item>
+        <item name="android:colorButtonNormal">#FD971A</item>
     </style>
 </resources>
