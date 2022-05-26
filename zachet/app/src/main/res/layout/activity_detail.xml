@@ -43,4 +43,14 @@
         android:onClick="onClickConfirmJob"
         android:text="Принять" />
 
+    <TextView
+        android:id="@+id/job_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="28sp"
+        android:visibility="invisible"
+        android:text="information" />
+
 </LinearLayout>

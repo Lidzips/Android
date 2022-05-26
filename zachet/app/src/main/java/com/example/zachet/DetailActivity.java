@@ -13,6 +13,10 @@ public class DetailActivity extends AppCompatActivity {
     String description = "";
     Double payment;
     String address = "";
+    TextView nameAgeText;
+    TextView descText;
+    TextView paymentText;
+    TextView information;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,18 +29,19 @@ public class DetailActivity extends AppCompatActivity {
             payment = args.getDouble("payment");
             address = args.getString("address");
         }
-        TextView nameAgeText = findViewById(R.id.employer_name_age);
-        TextView descText = findViewById(R.id.job_description);
-        TextView paymentText = findViewById(R.id.job_payment_1);
+        nameAgeText = findViewById(R.id.employer_name_age);
+        descText = findViewById(R.id.job_description);
+        paymentText = findViewById(R.id.job_payment_1);
+        information = findViewById(R.id.job_info);
 
-        nameAgeText.setText(name + " " + age);
+        nameAgeText.setText("Заказчик: " + name + " " + age);
         descText.setText(description);
-        paymentText.setText("Оплата: " + payment);
+        paymentText.setText("Оплата: " + payment + " руб.");
 
     }
 
     public void onClickConfirmJob(View view) {
-        Toast.makeText(getApplicationContext(), "Обращайтесь по адресу " + address,
-                Toast.LENGTH_LONG).show();
+        information.setVisibility(View.VISIBLE);
+        information.setText("Звоните по телефону: +79274044530 или обращайтесь по адресу: " + address);
     }
 }

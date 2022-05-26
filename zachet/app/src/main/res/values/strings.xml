@@ -7,7 +7,7 @@
     <string name="info_main_text">Это приложение создано для поиска подработки неподалеку от вас,
         например среди жильцов вашего двора, соседей и.т.д.
     </string>
-    <string name="info_additional_text">123124121</string>
+    <string name="info_additional_text">Вы можете обратиться в техподдержку по почте example@gmail.com</string>
     <string name="settings_header_text">Введите ваши данные</string>
     <string name="settings_name_text">Ваше имя</string>
     <string name="settings_age_text">Ваш возраст</string>

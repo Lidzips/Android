@@ -1,33 +1,116 @@
 package com.example.zachet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<SideJob> jobs = new ArrayList<SideJob>();
+    DatabaseHelper databaseHelper;
+    SQLiteDatabase db;
+    Cursor jobCursor;
+    Cursor userCursor;
+    SimpleCursorAdapter userAdapter;
+    TextView header;
+    RecyclerView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView header = findViewById(R.id.main_header);
-        RecyclerView list = findViewById(R.id.list);
-        if (User.user != null) {
+
+        header = findViewById(R.id.main_header);
+        list = findViewById(R.id.list);
+
+        list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        if (databaseHelper == null) {
+            databaseHelper = new DatabaseHelper(getApplicationContext());
+        }
+    }
+
+    @SuppressLint("Range")
+    @Override
+    public void onResume() {
+        super.onResume();
+        // открываем подключение
+        db = databaseHelper.getReadableDatabase();
+
+        if (User.user == null) {
+            userCursor = db.rawQuery("select * from " + DatabaseHelper.TABLE_PERSON, null);
+            if (userCursor.moveToPosition(10)) {
+                User.user = new Person(userCursor.getString(1), userCursor.getInt(2), userCursor.getString(3));
+                header.setVisibility(View.INVISIBLE);
+                list.setVisibility(View.VISIBLE);
+            }
+            userCursor.close();
+        } else {
             header.setVisibility(View.INVISIBLE);
             list.setVisibility(View.VISIBLE);
         }
-        setInitialData();
+
+        //получаем данные из бд в виде курсора
+        if (User.user != null) {
+            jobs.clear();
+            String userAddress = User.user.getAddress();
+            userAddress = "%" + userAddress + "%";
+            try {
+                jobCursor =  db.rawQuery("select * from "+ DatabaseHelper.TABLE_JOB + " inner join " + DatabaseHelper.TABLE_PERSON + " on " + DatabaseHelper.TABLE_JOB + "." + DatabaseHelper.COLUMN_PERSON_ID + " = " + DatabaseHelper.TABLE_PERSON + "." + DatabaseHelper.COLUMN_ID + " where " + DatabaseHelper.TABLE_PERSON + "." + DatabaseHelper.COLUMN_ADDRESS + " like ?", new String[]{"%" + userAddress + "%"});
+                userCursor = db.rawQuery("select * from "+ DatabaseHelper.TABLE_PERSON, null);
+
+                String descr;
+                Double payment;
+                int userId;
+                String name;
+                int age;
+                String address;
+                while (jobCursor.moveToNext()) {
+                    descr = jobCursor.getString(jobCursor.getColumnIndex(DatabaseHelper.COLUMN_DESCRIPTION));
+                    payment = jobCursor.getDouble(jobCursor.getColumnIndex(DatabaseHelper.COLUMN_PAYMENT));
+                    userId = jobCursor.getInt(jobCursor.getColumnIndex(DatabaseHelper.COLUMN_PERSON_ID));
+                    int pos = userId - 1;
+                    userCursor.moveToPosition(pos);
+                    name = userCursor.getString(userCursor.getColumnIndex(DatabaseHelper.COLUMN_NAME));
+                    age = userCursor.getInt(userCursor.getColumnIndex(DatabaseHelper.COLUMN_AGE));
+                    address = userCursor.getString(userCursor.getColumnIndex(DatabaseHelper.COLUMN_ADDRESS));
+                    Person person = new Person(name, age, address);
+                    SideJob job = new SideJob(person, descr, payment);
+                    jobs.add(job);
+                }
+
+                if (jobCursor.getCount() == 0) {
+                    System.out.println("123143");
+                    header.setVisibility(View.VISIBLE);
+                    list.setVisibility(View.INVISIBLE);
+                    header.setText("По вашему адресу ничего не найдено");
+                }
+
+                jobCursor.close();
+                userCursor.close();
+            } catch (SQLException ex) {
+
+            }
+
+
+
+        }
+
+
         SideJobAdapter.OnJobClickListener jobClickListener = new SideJobAdapter.OnJobClickListener() {
             @Override
             public void onJobClick(SideJob job, int position) {
@@ -42,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         };
+
         SideJobAdapter adapter = new SideJobAdapter(this, jobs, jobClickListener);
         list.setAdapter(adapter);
     }
@@ -71,16 +155,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setInitialData(){
-        Person person1 = new Person("Андрей", 28, "ул. Железнодорожная д. 16, подъезд 1, квартира 1");
-        Person person2 = new Person("Анастасия", 31, "ул. Железнодорожная д. 16, подъезд 2, квартира 35");
-        Person person3 = new Person("Геннадий", 41, "ул. Железнодорожная д. 16, подъезд 3, квартира 67");
-        Person person4 = new Person("Ольга", 29, "ул. Железнодорожная д. 16, подъезд 4, квартира 89");
-        Person person5 = new Person("Михаил", 36, "ул. Железнодорожная д. 16, подъезд 5, квартира 102");
-        jobs.add(new SideJob (person1, "Нужно почистить снег на парковочном месте", 500.00));
-        jobs.add(new SideJob (person2, "Ищу того кто может поухаживать за попугаем, пока я буду в отпуске", 1500.00));
-        jobs.add(new SideJob (person3, "Нужна помощь в починке машины", 700.00));
-        jobs.add(new SideJob (person4, "Помогите прикрутить полку", 600.00));
-        jobs.add(new SideJob (person5, "Нужно срочно принести суперклей в подъезд 2 кв 101", 500.00));
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        // Закрываем подключение и курсор
+        db.close();
+        jobCursor.close();
     }
 }

@@ -38,7 +38,7 @@ public class SideJobAdapter extends RecyclerView.Adapter<SideJobAdapter.ViewHold
     @Override
     public void onBindViewHolder(SideJobAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         SideJob job = jobs.get(position);
-        holder.paymentView.setText(job.getJobPayment().toString());
+        holder.paymentView.setText(job.getJobPayment().toString() + " руб");
         holder.descriptionView.setText(job.getDescription());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
