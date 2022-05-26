@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">zachet</string>
+    <string name="main">Главная</string>
+    <string name="settings">Настройки</string>
+    <string name="info">Инфо</string>
+    <string name="main_header_text">Зайдите в настройки и введите ваши данные</string>
+    <string name="info_main_text">Это приложение создано для поиска подработки неподалеку от вас,
+        например среди жильцов вашего двора, соседей и.т.д.
+    </string>
+    <string name="info_additional_text">123124121</string>
+    <string name="settings_header_text">Введите ваши данные</string>
+    <string name="settings_name_text">Ваше имя</string>
+    <string name="settings_age_text">Ваш возраст</string>
+    <string name="settings_address_text">Адрес</string>
+</resources>
