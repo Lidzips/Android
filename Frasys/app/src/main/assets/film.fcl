@@ -1,0 +1,86 @@
+FUNCTION_BLOCK rating
+
+VAR_INPUT
+  play : REAL;
+  story : REAL;
+  av : REAL;
+END_VAR
+
+VAR_OUTPUT
+  rate : REAL;
+END_VAR
+
+FUZZIFY play
+  TERM poor := gauss 2 2;
+  TERM good := gauss 5 2;
+  TERM excellent := gauss 8 2;
+END_FUZZIFY
+
+FUZZIFY story
+  TERM poor := (0, 1) (2, 1) (4, 0) ;
+  TERM good := (3, 0) (4,1) (6,1) (8,0);
+  TERM excellent := (7, 0) (8, 1) (10, 1);
+END_FUZZIFY
+
+FUZZIFY av
+    TERM poor := sigm -4 2;
+    TERM good := gbell 2 4 5;
+    TERM excellent := sigm 4 8;
+END_FUZZIFY
+
+    DEFUZZIFY rate
+      TERM poor := (0,1) (1.66,0);
+      TERM good := (1.66,0) (3.33,1) (4.99,0);
+      TERM excellent := (4.99,0) (6.66,1) (8.32,0);
+      TERM perfect := (8.32,0) (10,1);
+      METHOD : COG;
+      DEFAULT := 0;
+    END_DEFUZZIFY
+
+RULEBLOCK No1
+  AND : MIN;
+  ACT : MIN;
+  ACCU : MAX;
+
+  RULE 1 : IF play IS poor AND story IS poor AND av IS poor THEN rate IS poor;
+  RULE 2 : IF play IS poor AND story IS poor AND av IS good THEN rate IS poor;
+  RULE 3 : IF play IS poor AND story IS poor AND av IS excellent THEN rate IS poor;
+
+  RULE 4 : IF play IS poor AND story IS good AND av IS poor THEN rate IS poor;
+  RULE 5 : IF play IS poor AND story IS good AND av IS good THEN rate IS good;
+  RULE 6 : IF play IS poor AND story IS good AND av IS excellent THEN rate IS good;
+
+  RULE 7 : IF play IS poor AND story IS excellent AND av IS poor THEN rate IS good;
+  RULE 8 : IF play IS poor AND story IS excellent AND av IS good THEN rate IS good;
+  RULE 9 : IF play IS poor AND story IS excellent AND av IS excellent THEN rate IS excellent;
+
+  RULE 10 : IF play IS good AND story IS poor AND av IS poor THEN rate IS poor;
+  RULE 11 : IF play IS good AND story IS poor AND av IS good THEN rate IS good;
+  RULE 12 : IF play IS good AND story IS poor AND av IS excellent THEN rate IS good;
+
+  RULE 13 : IF play IS good AND story IS good AND av IS poor THEN rate IS good;
+  RULE 14 : IF play IS good AND story IS good AND av IS good THEN rate IS good;
+  RULE 15 : IF play IS good AND story IS good AND av IS excellent THEN rate IS excellent;
+
+  RULE 16 : IF play IS good AND story IS excellent AND av IS poor THEN rate IS good;
+  RULE 17 : IF play IS good AND story IS excellent AND av IS good THEN rate IS excellent;
+  RULE 18 : IF play IS good AND story IS excellent AND av IS excellent THEN rate IS excellent;
+
+  RULE 19 : IF play IS excellent AND story IS poor AND av IS poor THEN rate IS good;
+  RULE 20 : IF play IS excellent AND story IS poor AND av IS good THEN rate IS good;
+  RULE 21 : IF play IS excellent AND story IS poor AND av IS excellent THEN rate IS excellent;
+
+  RULE 22 : IF play IS excellent AND story IS good AND av IS poor THEN rate IS good;
+  RULE 23 : IF play IS excellent AND story IS good AND av IS good THEN rate IS excellent;
+  RULE 24 : IF play IS excellent AND story IS good AND av IS excellent THEN rate IS perfect;
+
+  RULE 25 : IF play IS excellent AND story IS excellent AND av IS poor THEN rate IS excellent;
+  RULE 26 : IF play IS excellent AND story IS excellent AND av IS good THEN rate IS perfect;
+  RULE 27 : IF play IS excellent AND story IS excellent AND av IS excellent THEN rate IS perfect;
+
+
+
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
